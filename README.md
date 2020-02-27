@@ -1,0 +1,2 @@
+# PlayerAuto
+Plugin PocketMine-MP
