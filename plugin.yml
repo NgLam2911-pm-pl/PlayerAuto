@@ -1,7 +1,7 @@
 name: PlayerAuto
 main: LamPocketVN\PlayerAuto\PlayerAuto
 version: 0.2.0.lpk
-api: 3.9.0
+api: 3.11.7
 
 permissions:
   playerauto.autosell:
