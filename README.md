@@ -1,5 +1,5 @@
 # PlayerAuto
-* A Simple plugin for PocketMine
+* A Simple plugin for PocketMine alo
 # Features
 - [X] Auto Sell
 - [X] Auto Feed
