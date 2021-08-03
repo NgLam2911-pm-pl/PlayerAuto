@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\features;
 
@@ -9,10 +10,7 @@ use LamPocketVN\PlayerAuto\PlayerAuto;
 
 class CreatePlayer implements Listener
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
     /**
      * CreatePlayer constructor.
      * @param PlayerAuto $plugin

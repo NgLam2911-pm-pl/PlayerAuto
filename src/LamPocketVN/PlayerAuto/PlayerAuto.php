@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto;
 
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use pocketmine\Player;
-use pocketmine\item\Item;
-
 use LamPocketVN\PlayerAuto\command\AutoSellCommand;
 use LamPocketVN\PlayerAuto\command\AutoFixCommand;
 use LamPocketVN\PlayerAuto\command\AutoFeedCommand;
@@ -16,33 +15,20 @@ use LamPocketVN\PlayerAuto\features\AutoFeed;
 use LamPocketVN\PlayerAuto\features\CreatePlayer;
 use LamPocketVN\PlayerAuto\task\AutoFixTask;
 
-/**
- * Class PlayerAuto
- * @package LamPocketVN\PlayerAuto
- */
 class PlayerAuto extends PluginBase
 {
-    /**
-     * @var $config
-     */
-    public $config;
-    /**
-     * @var $ase
-     * @var $afi
-     * @var $afe
-     */
+    public Config $config;
 
-    public $ase, $afi, $afe = [];
+    public array $ase, $afi, $afe = [];
 
-    /**
-     * @return mixed
-     */
-    public function getSetting()
+    public array $cfg;
+
+    public function getSetting(): array
     {
         return $this->cfg;
     }
 
-    public function onEnable()
+    public function onEnable(): void
     {
         $this->saveResource("config.yml");
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
@@ -50,7 +36,7 @@ class PlayerAuto extends PluginBase
         $this->CreateFeatures();
     }
 
-    public function CreateFeatures()
+    public function CreateFeatures(): void
     {
         $this->getServer()->getPluginManager()->registerEvents(new CreatePlayer($this), $this);
         if ($this->getSetting()['features']['autosell'] === true)
@@ -76,11 +62,7 @@ class PlayerAuto extends PluginBase
         }
     }
 
-    /**
-     * @param Player $player
-     * @return bool
-     */
-    public function isAutoSell($player)
+    public function isAutoSell(Player $player): bool
     {
         if ($this->ase[$player->getName()] === "on") {
             return true;
@@ -89,16 +71,12 @@ class PlayerAuto extends PluginBase
         }
     }
 
-    /**
-     * @param Player $player
-     * @param $mode
-     */
-    public function setAutoSell($player, $mode)
+    public function setAutoSell(Player $player, $mode): void
     {
         $this->ase[$player->getName()] = $mode;
     }
 
-    public function isAutoFeed($player)
+    public function isAutoFeed(Player $player): bool
     {
         if (isset($this->afe[$player->getName()]))
         {
@@ -112,12 +90,12 @@ class PlayerAuto extends PluginBase
             return false;
     }
 
-    public function setAutoFeed($player, $mode)
+    public function setAutoFeed(Player $player, $mode): void
     {
         $this->afe[$player->getName()] = $mode;
     }
 
-    public function isAutoFix ($player)
+    public function isAutoFix (Player $player): bool
     {
         if ($this->afi[$player->getName()] === "on") {
             return true;
@@ -126,7 +104,7 @@ class PlayerAuto extends PluginBase
         }
     }
 
-    public function setAutoFix($player, $mode)
+    public function setAutoFix($player, $mode): void
     {
         $this->afi[$player->getName()] = $mode;
     }

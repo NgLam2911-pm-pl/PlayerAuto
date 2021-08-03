@@ -1,12 +1,11 @@
 name: PlayerAuto
 main: LamPocketVN\PlayerAuto\PlayerAuto
-version: 0.2.0.lpk
-api: 3.11.7
+version: 0.3
+api: 4.0.0
 
 permissions:
   playerauto.autosell:
     default: true
-    description: "Allow player use command /autosell"
   playerauto.autofix:
     default: true
   playerauto.autofeed:

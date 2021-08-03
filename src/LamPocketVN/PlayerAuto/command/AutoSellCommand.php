@@ -1,24 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\command;
 
-use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
-use pocketmine\Player;
 
 use LamPocketVN\PlayerAuto\PlayerAuto;
+use pocketmine\player\Player;
 
-/**
- * Class AutoSellCommand
- * @package LamPocketVN\PlayerAuto\command
- */
-class AutoSellCommand extends PluginCommand
+class AutoSellCommand extends BaseCommand
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
     /**
      * AutoSellCommand constructor.
@@ -26,7 +18,7 @@ class AutoSellCommand extends PluginCommand
      */
     public function __construct(PlayerAuto $plugin)
     {
-        parent::__construct("autosell", $plugin);
+        parent::__construct("autosell");
         $this->setDescription('AutoSell Command');
         $this->setPermission("playerauto.autosell");
         $this->plugin = $plugin;

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\features;
 
@@ -6,13 +7,11 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerExhaustEvent;
 
 use LamPocketVN\PlayerAuto\PlayerAuto;
+use pocketmine\player\Player;
 
 class AutoFeed implements Listener
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
     /**
      * AutoFeed constructor.
@@ -25,13 +24,19 @@ class AutoFeed implements Listener
 
     /**
      * @param PlayerExhaustEvent $event
+	 * @priority HIGHEST
+	 * @handleCancelled FALSE
      */
-    public function onExhaust(PlayerExhaustEvent $event)
+    public function onExhaust(PlayerExhaustEvent $event): void
     {
         $player = $event->getPlayer();
+        if (!$player instanceof Player)
+		{
+			return;
+		}
         if ($this->plugin->isAutoFeed($player))
         {
-            $player->setFood(20);
+            $player->getHungerManager()->setFood(20);
         }
     }
 }

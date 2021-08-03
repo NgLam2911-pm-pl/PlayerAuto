@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\features;
 
@@ -9,6 +10,7 @@ use LamPocketVN\PlayerAuto\PlayerAuto;
 
 class AutoSell implements Listener
 {
+	private PlayerAuto $plugin;
     /**
      * AutoSell constructor.
      * @param PlayerAuto $plugin
@@ -20,6 +22,8 @@ class AutoSell implements Listener
 
     /**
      * @param BlockBreakEvent $event
+	 * @priority HIGHEST
+	 * @handleCancelled FALSE
      */
     public function onBreak(BlockBreakEvent $event)
     {

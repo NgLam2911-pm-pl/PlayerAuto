@@ -1,21 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\features;
 
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\item\Tool;
-use pocketmine\item\Item;
-use pocketmine\Player;
-
 use LamPocketVN\PlayerAuto\PlayerAuto;
 
 class AutoFix implements Listener
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
     /**
      * AutoFix constructor.
@@ -28,6 +23,8 @@ class AutoFix implements Listener
 
     /**
      * @param BlockBreakEvent $event
+	 * @priority HIGHEST
+	 * 2@handleCancelled FALSE
      */
     public function onBreak(BlockBreakEvent $event)
     {

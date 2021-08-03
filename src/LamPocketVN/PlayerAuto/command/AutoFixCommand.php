@@ -1,21 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\command;
 
-use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
-use pocketmine\Player;
 
 use LamPocketVN\PlayerAuto\PlayerAuto;
+use pocketmine\player\Player;
 
 
-class AutoFixCommand extends PluginCommand
+class AutoFixCommand extends BaseCommand
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
     /**
      * AutoFixCommand constructor.
@@ -23,7 +19,7 @@ class AutoFixCommand extends PluginCommand
      */
     public function __construct(PlayerAuto $plugin)
     {
-        parent::__construct("autofix", $plugin);
+        parent::__construct("autofix");
         $this->setDescription('AutoFix Command');
         $this->setPermission("playerauto.autofix");
         $this->plugin = $plugin;
@@ -33,19 +29,18 @@ class AutoFixCommand extends PluginCommand
      * @param CommandSender $sender
      * @param string $commandLabel
      * @param array $args
-     * @return bool
      */
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if(!$sender->hasPermission("playerauto.autofix"))
         {
             $sender->sendMessage("You not have premission to use this command");
-            return true;
+            return;
         }
         if(!$sender instanceof Player)
         {
             $sender->sendMessage("Please use this in-game.");
-            return true;
+            return;
         }
         if ($this->plugin->isAutoFix($sender))
         {
@@ -57,6 +52,5 @@ class AutoFixCommand extends PluginCommand
             $this->plugin->setAutoFix($sender, "on");
             $sender->sendMessage("AutoFix Enabled !");
         }
-        return true;
     }
 }

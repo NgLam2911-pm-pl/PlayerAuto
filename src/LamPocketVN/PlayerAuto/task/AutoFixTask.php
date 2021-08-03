@@ -1,37 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\task;
 
+use pocketmine\item\Tool;
 use pocketmine\scheduler\Task;
-use pocketmine\{Player, Server};
-use pocketmine\item\{Item, Tool};
-
 use LamPocketVN\PlayerAuto\PlayerAuto;
 
-/**
- * Class AutoFixTask
- * @package LamPocketVN\PlayerAuto\task
- */
 class AutoFixTask extends Task
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
-    /**
-     * AutoFixTask constructor.
-     * @param PlayerAuto $plugin
-     */
     public function __construct(PlayerAuto $plugin)
     {
         $this->plugin = $plugin;
     }
 
-    /**
-     * @param $currentick
-     */
-    public function onRun($currentick)
+    public function onRun(): void
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $player)
         {

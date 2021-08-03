@@ -1,21 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace LamPocketVN\PlayerAuto\command;
 
-use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginCommand;
-use pocketmine\Player;
 
 use LamPocketVN\PlayerAuto\PlayerAuto;
+use pocketmine\player\Player;
 
 
-class AutoFeedCommand extends PluginCommand
+class AutoFeedCommand extends BaseCommand
 {
-    /**
-     * @var $plugin
-     */
-    private $plugin;
+    private PlayerAuto $plugin;
 
     /**
      * AutoFeedCommand constructor.
@@ -23,7 +19,7 @@ class AutoFeedCommand extends PluginCommand
      */
     public function __construct(PlayerAuto $plugin)
     {
-        parent::__construct("autofeed", $plugin);
+        parent::__construct("autofeed");
         $this->setDescription('AutoFeed Command');
         $this->setPermission("playerauto.autofeed");
         $this->plugin = $plugin;
@@ -33,19 +29,18 @@ class AutoFeedCommand extends PluginCommand
      * @param CommandSender $sender
      * @param string $commandLabel
      * @param array $args
-     * @return bool
      */
-    public function execute(CommandSender $sender, string $commandLabel, array $args): bool
+    public function execute(CommandSender $sender, string $commandLabel, array $args): void
     {
         if(!$sender->hasPermission("playerauto.autofeed"))
         {
             $sender->sendMessage("You not have premission to use this command");
-            return true;
+            return;
         }
         if(!$sender instanceof Player)
         {
             $sender->sendMessage("Please use this in-game.");
-            return true;
+            return;
         }
         if ($this->plugin->isAutoFeed($sender))
         {
@@ -57,6 +52,5 @@ class AutoFeedCommand extends PluginCommand
             $this->plugin->setAutoFeed($sender, "on");
             $sender->sendMessage("AutoFeed Enabled !");
         }
-        return true;
     }
 }
