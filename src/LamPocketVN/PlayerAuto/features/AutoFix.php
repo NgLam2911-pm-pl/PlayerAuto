@@ -24,7 +24,7 @@ class AutoFix implements Listener
     /**
      * @param BlockBreakEvent $event
 	 * @priority HIGHEST
-	 * 2@handleCancelled FALSE
+	 * @handleCancelled FALSE
      */
     public function onBreak(BlockBreakEvent $event)
     {
